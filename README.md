@@ -33,5 +33,5 @@
 
 	```bash
 	mvn package
-	java -jar target/polls-0.0.1-SNAPSHOT.jar
+	java -jar target/assessment-0.0.1-SNAPSHOT.jar
 	```
