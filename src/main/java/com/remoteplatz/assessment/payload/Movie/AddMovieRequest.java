@@ -1,31 +1,24 @@
-package com.remoteplatz.assessment.dto;
+package com.remoteplatz.assessment.payload.Movie;
 
-import java.util.HashSet;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import java.util.Set;
 
-public class MovieDto {
+public class AddMovieRequest {
 
-    private int movieId;
     private String title;
+    @DecimalMin(value = "0.5", message = "rating must be between 0.5 and 5 inclusive")
+    @DecimalMax(value = "5.0", message = "rating must be between 0.5 and 5 inclusive")
     private float rating;
-    private Set<Integer> categories = new HashSet<>();
+    private Set<Integer> categories;
 
-    public MovieDto() {
+    public AddMovieRequest() {
     }
 
-    public MovieDto(int movieId, String title, float rating, Set<Integer> categories) {
-        this.movieId = movieId;
+    public AddMovieRequest(String title, float rating, Set<Integer> categories) {
         this.title = title;
         this.rating = rating;
         this.categories = categories;
-    }
-
-    public int getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
     }
 
     public String getTitle() {
@@ -54,9 +47,8 @@ public class MovieDto {
 
     @Override
     public String toString() {
-        return "MovieDto{" +
-                "movieId=" + movieId +
-                ", title='" + title + '\'' +
+        return "AddMovieRequest{" +
+                "title='" + title + '\'' +
                 ", rating=" + rating +
                 ", categories=" + categories +
                 '}';

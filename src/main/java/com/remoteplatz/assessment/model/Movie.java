@@ -7,6 +7,8 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "movie")
@@ -21,21 +23,24 @@ public class Movie implements Serializable {
     private String title;
 
     @Column(name = "rating")
-    @DecimalMin("0.5")
-    @DecimalMax("5")
     private float rating;
 
     @Column(name = "lastUpdate", columnDefinition = "TIMESTAMP")
     @UpdateTimestamp
     private LocalDateTime lastUpdate;
 
+    @OneToMany(mappedBy = "movie", cascade = {CascadeType.ALL}, orphanRemoval = true)
+    Set<MovieCategory> movieCategories;
+
     public Movie() {
     }
 
-    public Movie(String title, @DecimalMin("0.5") @DecimalMax("5") float rating, LocalDateTime lastUpdate) {
+    public Movie(int movieId, String title, @DecimalMin("0.5") @DecimalMax("5") float rating, LocalDateTime lastUpdate, Set<MovieCategory> movieCategories) {
+        this.movieId = movieId;
         this.title = title;
         this.rating = rating;
         this.lastUpdate = lastUpdate;
+        this.movieCategories = movieCategories;
     }
 
     public int getMovieId() {
@@ -70,6 +75,27 @@ public class Movie implements Serializable {
         this.lastUpdate = lastUpdate;
     }
 
+    public Set<MovieCategory> getMovieCategories() {
+        return movieCategories;
+    }
+
+    public void setMovieCategories(Set<MovieCategory> movieCategories) {
+        this.movieCategories = movieCategories;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return movieId == movie.movieId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(movieId);
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
@@ -77,6 +103,7 @@ public class Movie implements Serializable {
                 ", title='" + title + '\'' +
                 ", rating=" + rating +
                 ", lastUpdate=" + lastUpdate +
+                ", movieCategories=" + movieCategories +
                 '}';
     }
 }

@@ -1,15 +1,19 @@
-package com.remoteplatz.assessment.dto;
+package com.remoteplatz.assessment.payload.Category;
 
-public class CategoryDto {
+import javax.validation.constraints.NotBlank;
 
+public class UpdateCategoryRequest {
+
+    @NotBlank(message = "id must not be null or empty")
     private int id;
+    @NotBlank(message = "title must not be null or empty")
     private String title;
     private String desc;
 
-    public CategoryDto() {
+    public UpdateCategoryRequest() {
     }
 
-    public CategoryDto(int id, String title, String desc) {
+    public UpdateCategoryRequest(int id, String title, String desc) {
         this.id = id;
         this.title = title;
         this.desc = desc;
@@ -41,7 +45,7 @@ public class CategoryDto {
 
     @Override
     public String toString() {
-        return "CategoryDto{" +
+        return "CategoryRequest{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", desc='" + desc + '\'' +

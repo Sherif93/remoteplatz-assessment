@@ -4,6 +4,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "category")
@@ -14,8 +15,8 @@ public class Category {
     @Column(name = "category_id")
     private int categoryId;
 
-    @Column(name = "title", nullable = false)
-    private String title;
+    @OneToMany(mappedBy = "category")
+    Set<MovieCategory> categoryMovies;
 
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
@@ -23,6 +24,8 @@ public class Category {
     @Column(name = "lastUpdate", columnDefinition = "TIMESTAMP")
     @UpdateTimestamp
     private LocalDateTime lastUpdate;
+    @Column(name = "title", nullable = false, unique = true)
+    private String title;
 
     public Category() {
     }
