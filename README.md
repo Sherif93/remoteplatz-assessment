@@ -1,4 +1,4 @@
-## Steps to Setup the Spring Boot assessment
+## Steps to Setup the Spring Boot Assessment App
 
 1. **Clone the application**
 
