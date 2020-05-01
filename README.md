@@ -4,7 +4,7 @@
 
 	```bash
 	git clone https://github.com/Sherif93/remoteplatz-assessment.git
-	cd shopx-app-server
+	cd remoteplatz-assessment
 	```
 
 2. **Create MySQL database**
